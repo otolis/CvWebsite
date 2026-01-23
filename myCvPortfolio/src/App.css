@@ -323,3 +323,47 @@ body {
 }
 
 .footerSub { font-size: 0.8rem; opacity: 0.6; margin-top: 5px; }
+
+/* --- MOBILE RESPONSIVENESS FIXES --- */
+@media (max-width: 600px) {
+  
+  .mainWrapper {
+    padding: 40px 15px; 
+    width: 100%;
+    overflow-x: hidden; 
+  }
+
+  
+  .nameTitle {
+    font-size: 2.2rem; 
+    line-height: 1.2;  
+    word-wrap: break-word;
+  }
+
+  
+  .nameTitle span {
+    white-space: normal !important; 
+    display: inline !important;
+  }
+
+ 
+  .roleTitle {
+    font-size: 1.2rem;
+  }
+  
+  .bigSkillTitle {
+    font-size: 2.5rem;
+  }
+
+  
+  .modalContent {
+    width: 85%;
+    padding: 25px;
+    max-height: 80vh; 
+    overflow-y: auto; 
+  }
+  
+  .projectsGrid {
+    grid-template-columns: 1fr; 
+  }
+}
