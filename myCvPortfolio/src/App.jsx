@@ -1,26 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
+// Robust Anime.js import
 import * as animeModule from 'animejs';
+const anime = animeModule.default || animeModule;
+
+// Import Data, CSS, and Components
 import { cvData } from './data/cvData';
 import './App.css';
-
-const anime = animeModule.default || animeModule;
+import PhysicsSkills from './components/PhysicsSkills';
 
 function App() {
   const containerRef = useRef(null);
+  
+  // State for Modal (Project Pop-ups)
   const [selectedItem, setSelectedItem] = useState(null);
+  
+  // --- CHANGE: Default is now 'list' instead of 'physics' ---
+  const [skillsView, setSkillsView] = useState('list');
   
   // State for Typewriter Effect
   const [summaryText, setSummaryText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
+  // 1. Initial Page Load Animations
   useEffect(() => {
-    // 1. Entrance Animations
+    // Safety check for anime.js
     if (!anime || typeof anime.timeline !== 'function') {
       const elements = document.querySelectorAll('.headerSection, .sectionBlock');
       elements.forEach(el => el.style.opacity = 1);
     } else {
+      // Set initial state
       anime.set('.headerSection, .sectionBlock', { opacity: 0, translateY: 20 });
 
+      // Create timeline
       const timeline = anime.timeline({
         easing: 'easeOutExpo',
         duration: 800
@@ -38,7 +49,7 @@ function App() {
           opacity: [0, 1],
           delay: anime.stagger(150) 
         }, '-=400')
-        // Start typing after entrance is done
+        // Start typewriter after entrance animations finish
         .finished.then(() => setIsTyping(true));
     }
   }, []);
@@ -48,7 +59,7 @@ function App() {
     if (isTyping) {
       const fullText = cvData.personalInfo.summary;
       let i = 0;
-      const typeSpeed = 30; // Speed in ms
+      const typeSpeed = 30; // Speed in ms per character
 
       const typingInterval = setInterval(() => {
         setSummaryText(fullText.slice(0, i + 1));
@@ -62,6 +73,7 @@ function App() {
     }
   }, [isTyping]);
 
+  // Handlers
   const handleProjectClick = (project) => {
     setSelectedItem(project);
   };
@@ -74,7 +86,7 @@ function App() {
     anime({
       targets: e.target.children,
       translateY: [-5, 0],
-      color: ['#646cff', '#ffffff'],
+      color: ['#646cff', '#ffffff'], // Flash purple then white
       easing: 'easeInOutQuad',
       duration: 500,
       delay: anime.stagger(50)
@@ -84,7 +96,7 @@ function App() {
   return (
     <div className="mainWrapper" ref={containerRef}>
       
-      {/* Modal Overlay */}
+      {/* --- Modal Overlay (For Projects) --- */}
       {selectedItem && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
@@ -103,9 +115,10 @@ function App() {
         </div>
       )}
 
-      {/* Header Section */}
+      {/* --- Header Section --- */}
       <header className="headerSection">
         <h1 className="nameTitle" onMouseEnter={handleNameHover}>
+          {/* Split name into letters for hover effect */}
           {`${cvData.personalInfo.firstName} ${cvData.personalInfo.lastName}`.split('').map((letter, index) => (
             <span key={index} style={{ display: 'inline-block', whiteSpace: 'pre', pointerEvents: 'none' }}>
               {letter}
@@ -133,7 +146,7 @@ function App() {
         </a>
       </header>
 
-      {/* Experience */}
+      {/* --- Experience Section --- */}
       <section className="sectionBlock">
         <h3 className="sectionHeader">Experience</h3>
         {cvData.experience.map((job) => (
@@ -152,7 +165,7 @@ function App() {
         ))}
       </section>
 
-      {/* Projects */}
+      {/* --- Projects Section --- */}
       <section className="sectionBlock">
         <h3 className="sectionHeader">Projects (Click to View)</h3>
         <div className="projectsGrid">
@@ -175,37 +188,52 @@ function App() {
         </div>
       </section>
 
-      {/* Technical Skills */}
+      {/* --- Technical Skills (TOGGLEABLE) --- */}
       <section className="sectionBlock">
-        <h3 className="sectionHeader">Technical Skills</h3>
-        <div className="skillsContainer">
-          <div className="skillGroup">
-            <h4 className="skillCategory">Proficient</h4>
-            <div className="skillTags">
-              {cvData.skills.proficient.map((skill, idx) => (
-                <span key={idx} className="skillBadge primarySkill animatedSkill">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="skillGroup">
-            <h4 className="skillCategory">Intermediate</h4>
-            <div className="skillTags">
-              {cvData.skills.intermediate.map((skill, idx) => (
-                <span key={idx} className="skillBadge secondarySkill animatedSkill">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+        <div className="skillsHeaderContainer">
+          <h3 className="sectionHeader" style={{ borderBottom: 'none', marginBottom: 0 }}>
+            Technical Skills
+          </h3>
+          {/* TOGGLE BUTTON */}
+          <button 
+            className="toggleButton"
+            onClick={() => setSkillsView(skillsView === 'physics' ? 'list' : 'physics')}
+          >
+            {skillsView === 'physics' ? 'Switch to List View' : 'Try Physics Playground'}
+          </button>
         </div>
-      </section>
+        <div className="dividerLine"></div>
 
-      {/* Soft Skills */}
-      <section className="sectionBlock">
-        <h3 className="sectionHeader">Soft Skills & Certifications</h3>
-        <div className="softSkillsContainer">
+        {/* CONDITIONAL RENDER: List (Default) OR Physics */}
+        {skillsView === 'physics' ? (
+          <PhysicsSkills />
+        ) : (
+          <div className="skillsContainer fade-in">
+            <div className="skillGroup">
+              <h4 className="skillCategory">Proficient</h4>
+              <div className="skillTags">
+                {cvData.skills.proficient.map((skill, idx) => (
+                  <span key={idx} className="skillBadge primarySkill animatedSkill">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="skillGroup">
+              <h4 className="skillCategory">Intermediate</h4>
+              <div className="skillTags">
+                {cvData.skills.intermediate.map((skill, idx) => (
+                  <span key={idx} className="skillBadge secondarySkill animatedSkill">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Soft Skills (Always Visible) */}
+        <div style={{ marginTop: '30px' }} className="softSkillsContainer">
           {cvData.skills.softSkills.map((skill, idx) => (
             <div key={idx} className="softSkillItem">
               <span className="checkIcon">✓</span> {skill}
@@ -214,7 +242,7 @@ function App() {
         </div>
       </section>
 
-      {/* Education */}
+      {/* --- Education Section --- */}
       <section className="sectionBlock">
         <h3 className="sectionHeader">Education</h3>
         {cvData.education.map((edu) => (
@@ -225,7 +253,7 @@ function App() {
         ))}
       </section>
 
-      {/* Footer */}
+      {/* --- Footer --- */}
       <footer className="footerSection">
         <p>© {new Date().getFullYear()} {cvData.personalInfo.firstName} {cvData.personalInfo.lastName}</p>
         <p className="footerSub">Built with React, Vite & Anime.js</p>
