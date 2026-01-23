@@ -7,7 +7,7 @@ export const cvData = {
     email: "apostoloslagwnikas@gmail.com",
     github: "github.com/otolis",
     phone: "+30 6978226516",
-    cvPdf: "/Apostolos_Lagonikas_CV.pdf", 
+    cvPdf: "myCvPortfolio\public\Apostolos_Lagonikas_CV.pdf", 
     summary: "Passionate about learning and constantly improving skills. Strong foundation in computer science with hands-on experience in various programming languages and frameworks."
   },
   experience: [

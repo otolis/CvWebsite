@@ -14,10 +14,8 @@ function App() {
   // State for Modal (Project Pop-ups)
   const [selectedItem, setSelectedItem] = useState(null);
   
-  // --- CHANGE: Default is now 'list' instead of 'physics' ---
   const [skillsView, setSkillsView] = useState('list');
   
-  // State for Typewriter Effect
   const [summaryText, setSummaryText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
@@ -49,12 +47,10 @@ function App() {
           opacity: [0, 1],
           delay: anime.stagger(150) 
         }, '-=400')
-        // Start typewriter after entrance animations finish
         .finished.then(() => setIsTyping(true));
     }
   }, []);
 
-  // 2. Typewriter Logic
   useEffect(() => {
     if (isTyping) {
       const fullText = cvData.personalInfo.summary;
