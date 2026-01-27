@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import PhysicsSkills from './PhysicsSkills';
+import { useScrollAnimations } from '../hooks/useScrollAnimations';
 
 const Skills = ({ skills }) => {
     const [skillsView, setSkillsView] = useState('list');
+    const sectionRef = useScrollAnimations({
+        animationType: 'zoom-in',
+        selector: '.skillBadge',
+        stagger: 50
+    });
 
     return (
-        <section className="sectionBlock">
+        <section className="sectionBlock" ref={sectionRef}>
             <div className="skillsHeaderContainer">
-                <h3 className="sectionHeader" style={{ borderBottom: 'none', marginBottom: 0 }}>
+                <h3 className="sectionHeader" style={{ borderBottom: 'none', marginBottom: 0, opacity: 0 }}>
                     Technical Skills
                 </h3>
                 <button
@@ -27,7 +33,7 @@ const Skills = ({ skills }) => {
                         <h4 className="skillCategory">Proficient</h4>
                         <div className="skillTags">
                             {skills.proficient.map((skill, idx) => (
-                                <span key={idx} className="skillBadge primarySkill animatedSkill">
+                                <span key={idx} className="skillBadge primarySkill animatedSkill" style={{ opacity: 0 }}>
                                     {skill}
                                 </span>
                             ))}
@@ -37,7 +43,7 @@ const Skills = ({ skills }) => {
                         <h4 className="skillCategory">Intermediate</h4>
                         <div className="skillTags">
                             {skills.intermediate.map((skill, idx) => (
-                                <span key={idx} className="skillBadge secondarySkill animatedSkill">
+                                <span key={idx} className="skillBadge secondarySkill animatedSkill" style={{ opacity: 0 }}>
                                     {skill}
                                 </span>
                             ))}

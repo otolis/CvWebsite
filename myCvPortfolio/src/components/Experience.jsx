@@ -1,11 +1,18 @@
 import React from 'react';
+import { useScrollAnimations } from '../hooks/useScrollAnimations';
 
 const Experience = ({ experience }) => {
+    const sectionRef = useScrollAnimations({
+        animationType: 'stagger-slide',
+        selector: '.experienceCard',
+        stagger: 200
+    });
+
     return (
-        <section className="sectionBlock">
-            <h3 className="sectionHeader">Experience</h3>
+        <section className="sectionBlock" ref={sectionRef}>
+            <h3 className="sectionHeader" style={{ opacity: 0 }}>Experience</h3>
             {experience.map((job) => (
-                <div key={job.id} className="experienceCard">
+                <div key={job.id} className="experienceCard" style={{ opacity: 0 }}>
                     <div className="cardHeader">
                         <h4 className="jobRole">{job.role}</h4>
                         <span className="jobDate">{job.period}</span>

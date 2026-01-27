@@ -1,48 +1,44 @@
 import { useEffect } from 'react';
-import * as animeModule from 'animejs';
-const anime = animeModule.default || animeModule;
+import { animate, createTimeline, utils } from 'animejs';
 
 export const usePageAnimations = (onFinished) => {
     useEffect(() => {
-        if (!anime || typeof anime.timeline !== 'function') {
-            const elements = document.querySelectorAll('.headerSection, .sectionBlock');
+        if (typeof createTimeline !== 'function') {
+            const elements = document.querySelectorAll('.headerSection');
             elements.forEach(el => el.style.opacity = 1);
             if (onFinished) onFinished();
         } else {
-            anime.set('.headerSection, .sectionBlock', { opacity: 0, translateY: 20 });
+            // Set initial state - ensure visibility fallback
+            const headers = document.querySelectorAll('.headerSection');
+            headers.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+            });
 
-            const timeline = anime.timeline({
-                easing: 'easeOutExpo',
-                duration: 800
+            const timeline = createTimeline({
+                onComplete: () => {
+                    if (onFinished) onFinished();
+                }
             });
 
             timeline
-                .add({
-                    targets: '.headerSection',
-                    translateY: [20, 0],
-                    opacity: [0, 1]
-                })
-                .add({
-                    targets: '.sectionBlock',
+                .add('.headerSection', {
                     translateY: [20, 0],
                     opacity: [0, 1],
-                    delay: anime.stagger(150)
-                }, '-=400')
-                .finished.then(() => {
-                    if (onFinished) onFinished();
+                    easing: 'easeOutExpo',
+                    duration: 800
                 });
         }
     }, [onFinished]);
 
     const handleNameHover = (e) => {
-        if (!anime) return;
-        anime({
-            targets: e.target.children,
+        if (typeof animate !== 'function') return;
+        animate(e.target.children, {
             translateY: [-5, 0],
             color: ['#646cff', '#ffffff'],
             easing: 'easeInOutQuad',
             duration: 500,
-            delay: anime.stagger(50)
+            delay: utils.stagger(50)
         });
     };
 
