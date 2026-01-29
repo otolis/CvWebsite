@@ -6,15 +6,19 @@ const PhysicsSkills = () => {
   const sceneRef = useRef(null);
   const engineRef = useRef(null);
   const bodiesRef = useRef(new Map());
-  
-  // Combine all skills
-  const allSkills = [...cvData.skills.proficient, ...cvData.skills.intermediate];
+
+  // Combine all skills from new categories
+  const allSkills = [
+    ...cvData.skills.languages,
+    ...cvData.skills.frameworks,
+    ...cvData.skills.tools
+  ];
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     // Wait 500ms for the entrance animation to finish and layout to settle
     const initTimer = setTimeout(() => {
-      
+
       // Cleanup previous instances (React StrictMode fix)
       if (engineRef.current) {
         Matter.World.clear(engineRef.current.world);
@@ -22,19 +26,19 @@ const PhysicsSkills = () => {
       }
 
       const Engine = Matter.Engine,
-            Render = Matter.Render,
-            World = Matter.World,
-            Bodies = Matter.Bodies,
-            Mouse = Matter.Mouse,
-            MouseConstraint = Matter.MouseConstraint,
-            Runner = Matter.Runner;
+        Render = Matter.Render,
+        World = Matter.World,
+        Bodies = Matter.Bodies,
+        Mouse = Matter.Mouse,
+        MouseConstraint = Matter.MouseConstraint,
+        Runner = Matter.Runner;
 
       const engine = Engine.create();
       engineRef.current = engine;
 
       // Get dimensions safely
       const container = sceneRef.current;
-      const width = container ? container.clientWidth : 800; 
+      const width = container ? container.clientWidth : 800;
       const height = 400;
 
       const render = Render.create({
@@ -44,7 +48,7 @@ const PhysicsSkills = () => {
           width,
           height,
           background: 'transparent',
-          wireframes: false, 
+          wireframes: false,
         }
       });
 
@@ -52,7 +56,7 @@ const PhysicsSkills = () => {
       // We make walls thick so items don't tunnel through
       const wallOptions = { isStatic: true, render: { visible: false } };
       const floor = Bodies.rectangle(width / 2, height + 50, width, 100, wallOptions);
-      const ceiling = Bodies.rectangle(width / 2, -100, width, 100, wallOptions); // Higher ceiling
+      const ceiling = Bodies.rectangle(width / 2, -100, width, 100, wallOptions);
       const leftWall = Bodies.rectangle(-50, height / 2, 100, height * 2, wallOptions);
       const rightWall = Bodies.rectangle(width + 50, height / 2, 100, height * 2, wallOptions);
 
@@ -60,10 +64,9 @@ const PhysicsSkills = () => {
 
       // --- SKILLS ---
       allSkills.forEach((skill, index) => {
-        // Spawn randomly but strictly INSIDE the box
-        const x = Math.random() * (width - 100) + 50; 
-        const y = Math.random() * (height / 2) + 50; // Spawn in top half
-        
+        const x = Math.random() * (width - 100) + 50;
+        const y = Math.random() * (height / 2) + 50;
+
         const body = Bodies.rectangle(x, y, 120, 40, {
           chamfer: { radius: 20 },
           restitution: 0.8, // Bounciness
@@ -71,7 +74,7 @@ const PhysicsSkills = () => {
           render: { visible: false }
         });
 
-        body.label = skill; 
+        body.label = skill;
         World.add(engine.world, body);
       });
 
@@ -84,7 +87,7 @@ const PhysicsSkills = () => {
           render: { visible: false }
         }
       });
-      
+
       // Allow scrolling over the canvas
       mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
       mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
@@ -105,7 +108,7 @@ const PhysicsSkills = () => {
         if (!engineRef.current) return;
 
         const bodies = Matter.Composite.allBodies(engineRef.current.world);
-        
+
         bodies.forEach(body => {
           const domNode = bodiesRef.current.get(body.label);
           if (domNode) {
@@ -126,7 +129,7 @@ const PhysicsSkills = () => {
 
   return (
     <div style={{ position: 'relative', height: '400px', width: '100%', overflow: 'hidden', background: '#1e1e1e', borderRadius: '12px', border: '1px solid #333' }}>
-      
+
       {/* Physics Container */}
       <div ref={sceneRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
 
@@ -159,7 +162,7 @@ const PhysicsSkills = () => {
           {skill}
         </div>
       ))}
-      
+
       <div style={{ position: 'absolute', bottom: 10, left: 0, width: '100%', textAlign: 'center', color: '#666', pointerEvents: 'none', fontSize: '0.8rem' }}>
         Grab and throw the skills!
       </div>

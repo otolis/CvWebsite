@@ -7,7 +7,7 @@ export const cvData = {
     email: "apostoloslagwnikas@gmail.com",
     github: "github.com/otolis",
     phone: "+30 6978226516",
-    cvPdf: "/CvWebsite/Apostolos_Lagonikas_CV.pdf",    
+    cvPdf: "/CvWebsite/Apostolos_Lagonikas_CV.pdf",
     summary: "Passionate about learning and constantly improving skills. Strong foundation in computer science with hands-on experience in various programming languages and frameworks."
   },
   experience: [
@@ -48,8 +48,9 @@ export const cvData = {
     }
   ],
   skills: {
-    proficient: ["C#", "JavaScript", "React", "Flutter", "Node.js", "Python", "Umbraco", "Firebase", "Vite", "HTML", "CSS", "Git", "RESTful API"],
-    intermediate: ["PHP", "SQL", "C", "C++", "WordPress"],
+    languages: ["C#", "C++", "Dart", "Python", "JavaScript", "HTML", "CSS"],
+    frameworks: ["React", "Flutter", "Node.js", "Express", "Vite", ".NET"],
+    tools: ["Firebase", "SQLite", "MongoDB", "Webpack", "Git", "RESTful APIs", "Umbraco"],
     softSkills: ["Deep understanding of programming concepts", "Strong organizational skills", "Highly adaptable"]
   },
   projects: [
@@ -57,18 +58,25 @@ export const cvData = {
       id: 1,
       title: "Flash Chat Flutter",
       tech: ["Flutter", "Firebase", "Dart"],
-      description: "Real-time messaging application using Flutter for frontend and Firebase for backend with secure authentication.",
+      description: "Engineered a real-time messaging application using Flutter and Dart, integrating Firebase Cloud Firestore for synchronization and Firebase Authentication for secure user login.",
       link: "github.com/otolis/FlashChatFlutter"
     },
     {
       id: 2,
       title: "Spotify Album Finder",
       tech: ["React", "Vite", "RESTful API", "CSS"],
-      description: "Dynamic web application allowing users to search for artists and browse albums using the Spotify Web API.",
+      description: "Built a high-performance web application using React and Vite, leveraging the Spotify Web API for album search and implementing efficient state management.",
       link: "github.com/otolis/SpotifyAlbumFinder"
     },
     {
       id: 3,
+      title: "Clima",
+      tech: ["Dart", "Flutter", "RESTful API"],
+      description: "Developed a dynamic weather application using external REST APIs and geolocation services to provide real-time weather data based on user location.",
+      link: "github.com/otolis/Clima"
+    },
+    {
+      id: 4,
       title: "Message Board",
       tech: ["Node.js", "Express", "MongoDB", "EJS"],
       description: "Full-stack message board application with RESTful routes, form validation, and secure password handling.",

@@ -8,6 +8,7 @@ export const useScrollAnimations = (options = {}) => {
         selector = null, // CSS selector for children to stagger
         stagger = 0,     // Delay between children
         delay = 0,        // Initial delay
+        trigger = null,   // Extra dependency to re-trigger
     } = options;
 
     useEffect(() => {
@@ -29,7 +30,9 @@ export const useScrollAnimations = (options = {}) => {
             // Trigger when the element enters the viewport
             onEnter: () => {
                 triggerAnimation(element, animationType, selector, stagger, delay);
-                if (observer && observer.revert) observer.revert(); // Single trigger
+                requestAnimationFrame(() => {
+                    if (observer && observer.revert) observer.revert();
+                });
             }
         });
 
@@ -38,7 +41,7 @@ export const useScrollAnimations = (options = {}) => {
                 observer.revert();
             }
         };
-    }, [animationType, selector, stagger, delay]);
+    }, [animationType, selector, stagger, delay, trigger]);
 
     const triggerAnimation = (target, type, childSelector, staggerVal, initialDelay) => {
         const showElement = (el) => {

@@ -7,11 +7,12 @@ const Skills = ({ skills }) => {
     const sectionRef = useScrollAnimations({
         animationType: 'zoom-in',
         selector: '.skillBadge',
-        stagger: 50
+        stagger: 50,
+        trigger: skillsView
     });
 
     return (
-        <section className="sectionBlock" ref={sectionRef}>
+        <section className="sectionBlock" ref={sectionRef} key={skillsView}>
             <div className="skillsHeaderContainer">
                 <h3 className="sectionHeader" style={{ borderBottom: 'none', marginBottom: 0, opacity: 0 }}>
                     Technical Skills
@@ -30,9 +31,9 @@ const Skills = ({ skills }) => {
             ) : (
                 <div className="skillsContainer fade-in">
                     <div className="skillGroup">
-                        <h4 className="skillCategory">Proficient</h4>
+                        <h4 className="skillCategory">Languages</h4>
                         <div className="skillTags">
-                            {skills.proficient.map((skill, idx) => (
+                            {skills.languages.map((skill, idx) => (
                                 <span key={idx} className="skillBadge primarySkill animatedSkill" style={{ opacity: 0 }}>
                                     {skill}
                                 </span>
@@ -40,9 +41,19 @@ const Skills = ({ skills }) => {
                         </div>
                     </div>
                     <div className="skillGroup">
-                        <h4 className="skillCategory">Intermediate</h4>
+                        <h4 className="skillCategory">Frameworks & Libraries</h4>
                         <div className="skillTags">
-                            {skills.intermediate.map((skill, idx) => (
+                            {skills.frameworks.map((skill, idx) => (
+                                <span key={idx} className="skillBadge secondarySkill animatedSkill" style={{ opacity: 0 }}>
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="skillGroup">
+                        <h4 className="skillCategory">Tools & Technologies</h4>
+                        <div className="skillTags">
+                            {skills.tools.map((skill, idx) => (
                                 <span key={idx} className="skillBadge secondarySkill animatedSkill" style={{ opacity: 0 }}>
                                     {skill}
                                 </span>
