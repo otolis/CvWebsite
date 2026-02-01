@@ -81,6 +81,14 @@ export const cvData = {
       tech: ["Node.js", "Express", "MongoDB", "EJS"],
       description: "Full-stack message board application with RESTful routes, form validation, and secure password handling.",
       link: "github.com/otolis/messageBoard"
+    },
+    {
+      id: 5,
+      title: "StockingApp",
+      tech: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS", "Anime.js"],
+      description: "High-performance inventory management system with a 'Tactile-Industrial' aesthetic and real-time synchronization.",
+      link: "github.com/otolis/StockingApp",
+      liveDemo: "nexus-stock-a2dba.web.app"
     }
   ]
 };

@@ -14,9 +14,16 @@ const ProjectModal = ({ item, onClose }) => {
                     ))}
                 </div>
                 <p className="modalDescription">{item.description}</p>
-                <a href={`https://${item.link}`} className="modalLink" target="_blank" rel="noreferrer">
-                    View Source Code
-                </a>
+                <div className="modalLinks">
+                    <a href={`https://${item.link}`} className="modalLink" target="_blank" rel="noreferrer">
+                        View Source Code
+                    </a>
+                    {item.liveDemo && (
+                        <a href={`https://${item.liveDemo}`} className="modalLink demoLink" target="_blank" rel="noreferrer">
+                            Live Demo
+                        </a>
+                    )}
+                </div>
             </div>
         </div>
     );
