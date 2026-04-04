@@ -89,6 +89,20 @@ export const cvData = {
       description: "High-performance inventory management system with a 'Tactile-Industrial' aesthetic and real-time synchronization.",
       link: "github.com/otolis/StockingApp",
       liveDemo: "nexus-stock-a2dba.web.app"
+    },
+    {
+      id: 6,
+      title: "Dynamic Resource Management Engine",
+      tech: ["NestJS", "TypeScript", "React", "PostgreSQL", "Prisma"],
+      description: "Multi-tenant ERP / Project Management platform built on a meta-schema (EAV) architecture, allowing organizations to define entities, custom fields, state-machine workflows, and role-based access control at runtime — without code changes or database migrations.",
+      link: "github.com/otolis/DynamicResourceManagementEngine"
+    },
+    {
+      id: 7,
+      title: "Focus Forge",
+      tech: ["Flutter", "Dart", "Supabase", "Riverpod", "Groq LLM"],
+      description: "Smart productivity app combining task management, habit tracking, and AI-powered daily planning. Uses natural language processing to parse tasks, generates adaptive schedules, and supports real-time collaborative boards.",
+      link: "github.com/otolis/FocusForge"
     }
   ]
 };
