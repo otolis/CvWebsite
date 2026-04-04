@@ -6,6 +6,7 @@ import { cvData } from './data/cvData';
 
 // Hooks
 import { usePageAnimations } from './hooks/usePageAnimations';
+import { useJuice } from './hooks/useJuice';
 
 // Components
 import Header from './components/Header';
@@ -15,6 +16,7 @@ import Skills from './components/Skills';
 import Education from './components/Education';
 import Footer from './components/Footer';
 import ProjectModal from './components/ProjectModal';
+import ScrollProgress from './components/ScrollProgress';
 
 function App() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -22,9 +24,11 @@ function App() {
 
   // Initialize animations and hover handlers
   const { handleNameHover } = usePageAnimations(() => setShowTypewriter(true));
+  useJuice();
 
   return (
     <div className="mainWrapper">
+      <ScrollProgress />
       <ProjectModal
         item={selectedProject}
         onClose={() => setSelectedProject(null)}
