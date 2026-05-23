@@ -2,7 +2,7 @@ export const cvData = {
   personalInfo: {
     firstName: "Apostolos",
     lastName: "Lagonikas",
-    title: "Software Engineer",
+    title: "Full-Stack Developer",
     location: "Piraeus 18546",
     email: "apostoloslagwnikas@gmail.com",
     github: "github.com/otolis",
@@ -13,13 +13,14 @@ export const cvData = {
   experience: [
     {
       id: 1,
-      role: "Software Engineer",
+      role: "Full-Stack Developer",
       company: "REDIRECT",
       period: "September 2025 – Present",
       location: "Remote / Hybrid",
       tasks: [
-        "Focusing on software engineering principles and .NET development.",
-        "Contributing to the development of scalable solutions and engineering workflows."
+        "Building and maintaining full-stack web features across Razor/C# back-end logic, REST APIs, and JavaScript front-end implementations.",
+        "Delivering multi-site solutions on Umbraco CMS for hospital clients, including version upgrades and large-scale content migrations.",
+        "Automating build and deployment pipelines with GitHub Actions and managing release workflows across Windows (IIS) and Linux environments."
       ]
     }
   ],
