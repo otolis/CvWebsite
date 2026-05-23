@@ -21,16 +21,6 @@ export const cvData = {
         "Focusing on software engineering principles and .NET development.",
         "Contributing to the development of scalable solutions and engineering workflows."
       ]
-    },
-    {
-      id: 2,
-      role: "Assistant Warehouse Operations Manager",
-      company: "Pantelis K. Donoupoglou SA",
-      period: "June 2024 – June 2025",
-      tasks: [
-        "Managed daily warehouse operations to ensure efficiency and accuracy.",
-        "Facilitated team collaboration and coordinated workflows to meet operational targets."
-      ]
     }
   ],
   education: [

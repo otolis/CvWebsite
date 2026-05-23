@@ -7,6 +7,7 @@ import { cvData } from './data/cvData';
 // Hooks
 import { usePageAnimations } from './hooks/usePageAnimations';
 import { useJuice } from './hooks/useJuice';
+import { useLenis } from './hooks/useLenis';
 
 // Components
 import Header from './components/Header';
@@ -25,6 +26,7 @@ function App() {
   // Initialize animations and hover handlers
   const { handleNameHover } = usePageAnimations(() => setShowTypewriter(true));
   useJuice();
+  useLenis();
 
   return (
     <div className="mainWrapper">
