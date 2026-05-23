@@ -63,42 +63,20 @@ export const cvData = {
     },
     {
       id: 2,
-      title: "Spotify Album Finder",
-      tech: ["React", "Vite", "RESTful API", "CSS"],
-      description: "Built a high-performance web application using React and Vite, leveraging the Spotify Web API for album search and implementing efficient state management.",
-      link: "github.com/otolis/SpotifyAlbumFinder"
+      title: "Fraud Detection Using ML",
+      tech: ["Python", "scikit-learn", "pandas", "Streamlit", "Jupyter"],
+      description: "Built a fraud detection system on a 6.3M-row financial transactions dataset. Engineered balance-difference features, trained Logistic Regression and Random Forest classifiers, and exposed both models via a Streamlit web app. Raised fraud F1-score from 0.04 to 0.88 by switching algorithms and handling severe class imbalance (0.13% fraud rate).",
+      link: "github.com/otolis/fraudDetectionUsingML"
     },
     {
       id: 3,
-      title: "Clima",
-      tech: ["Dart", "Flutter", "RESTful API"],
-      description: "Developed a dynamic weather application using external REST APIs and geolocation services to provide real-time weather data based on user location.",
-      link: "github.com/otolis/Clima"
-    },
-    {
-      id: 4,
-      title: "Message Board",
-      tech: ["Node.js", "Express", "MongoDB", "EJS"],
-      description: "Full-stack message board application with RESTful routes, form validation, and secure password handling.",
-      link: "github.com/otolis/messageBoard"
-    },
-    {
-      id: 5,
-      title: "StockingApp",
-      tech: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS", "Anime.js"],
-      description: "High-performance inventory management system with a 'Tactile-Industrial' aesthetic and real-time synchronization.",
-      link: "github.com/otolis/StockingApp",
-      liveDemo: "nexus-stock-a2dba.web.app"
-    },
-    {
-      id: 6,
       title: "Dynamic Resource Management Engine",
       tech: ["NestJS", "TypeScript", "React", "PostgreSQL", "Prisma"],
       description: "Multi-tenant ERP / Project Management platform built on a meta-schema (EAV) architecture, allowing organizations to define entities, custom fields, state-machine workflows, and role-based access control at runtime — without code changes or database migrations.",
       link: "github.com/otolis/DynamicResourceManagementEngine"
     },
     {
-      id: 7,
+      id: 4,
       title: "Focus Forge",
       tech: ["Flutter", "Dart", "Supabase", "Riverpod", "Groq LLM"],
       description: "Smart productivity app combining task management, habit tracking, and AI-powered daily planning. Uses natural language processing to parse tasks, generates adaptive schedules, and supports real-time collaborative boards.",
